@@ -40,10 +40,6 @@
       <router-view />
     </q-page-container>
   </q-layout>
-    <q-page-container>
-      <router-view />
-    </q-page-container>
-
 </template>
 
 <script lang="ts">
