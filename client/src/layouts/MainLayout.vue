@@ -34,6 +34,16 @@
             label="About"
           />
         </q-tabs>
+        <q-select
+          style="font-family: 'Fredoka One', cursive; min-width: 100px;"
+          v-model="locale"
+          :options="localeOptions"
+          dense
+          borderless
+          emit-value
+          map-options
+          options-dense
+        />
       </q-toolbar>
     </div>
     <q-page-container>
@@ -43,14 +53,23 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue';
+import { ref,  watch  } from 'vue';
+import { useI18n } from 'vue-i18n'
 
 export default {
   name: 'MainLayout',
 
   setup() {
+    const { locale } = useI18n({ useScope: 'global' })
     return {
       tab: ref(''),
+
+      locale,
+      localeOptions: [
+        { value: 'en-US', label: 'English 🇬🇧' },
+        { value: 'gr', label: 'Greek 🇬🇷' },
+        { value: 'ar', label: 'Arabic 🇸🇦'}
+      ]
     };
   },
 };
