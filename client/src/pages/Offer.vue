@@ -1,6 +1,6 @@
 <template>
   <q-page class="column items-center justify-evenly">
-    <h2>If you are a space owner, fill the form.</h2>
+    <h2 class="text-center">If you are a space owner, fill the form.</h2>
     <div class="q-pa-md" style="max-width: 400px">
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
