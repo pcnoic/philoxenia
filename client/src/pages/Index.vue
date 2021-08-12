@@ -1,7 +1,10 @@
 <template>
   <q-page class="column items-center justify-evenly">
-    <h2 style="font-family: 'Megrim', cursive">
-      Welcome to Philoxenia, the P2P Space Exchange 🫂 🐾 👶
+    <h2 class="text-center" style="font-family: 'Megrim', cursive">
+      🫂
+      <br><br>
+      Welcome to Philoxenia, the P2P Space Exchange
+       
     </h2>
     <q-btn
       align="around"
