@@ -17,6 +17,7 @@
           type="number"
           v-model="age"
           label="Your age *"
+          hint="Your age. Eg: 25"
           lazy-rules
           :rules="[
             (val) => (val !== null && val !== '') || 'Please type your age',
@@ -24,9 +25,36 @@
           ]"
         />
 
-        
+        <q-select
+          standout
+          v-model="spacetype"
+          :options="options"
+          label="Space Type"
+        />
 
-        <q-toggle v-model="accept" label="I accept the license and terms" />
+        <q-badge color="secondary">
+          Max visitors: {{ visitorscount }}
+        </q-badge>
+
+        <q-slider
+          v-model="visitorscount"
+          :min="1"
+          :max="15"
+          :step="1"
+          label="Visitors"
+          label-always
+          color="light-green"
+        />
+
+        <div class="q-pa-md">
+          <q-checkbox v-model="pet" label="Pet Friendly" />
+        </div>
+
+        <div class="q-pa-md">
+          <q-date v-model="timeperiod" range />
+        </div>
+
+        <q-toggle v-model="accept" label="I accept the conditions." />
 
         <div>
           <q-btn label="Submit" type="submit" color="primary" />
@@ -56,6 +84,19 @@ export default {
     const accept = ref(false);
 
     return {
+      visitorscount: ref(1),
+      spacetype: ref(null),
+      options: [
+        'Flat',
+        'Condo',
+        'Single-Family',
+        'Cottage',
+        'Villa',
+        'Tiny Home',
+        'Shared Space',
+      ],
+      timeperiod: ref({ from: '2020/07/08', to: '2020/07/17' }),
+      pet: ref(false),
       name,
       age,
       accept,
