@@ -51,7 +51,7 @@
         </div>
 
         <div class="q-pa-md">
-          <q-date subtitle="Availability" v-model="timeperiod" range />
+          <q-date subtitle="Availability" v-model="timeperiod" range color="purple" />
         </div>
 
         <q-toggle v-model="accept" label="I accept the conditions." />
