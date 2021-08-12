@@ -28,13 +28,20 @@
         <q-select
           standout
           v-model="spacetype"
-          :options="options"
+          :space_options="space_options"
           label="Space Type"
+          hint="The type of space you're offering"
         />
 
-        <q-badge color="secondary">
-          Max visitors: {{ visitorscount }}
-        </q-badge>
+        <q-select
+          standout
+          v-model="pet"
+          :options="pet_options"
+          label="Pet Friendly"
+          hint="If you accept pets in your offered space"
+        />
+
+        <q-badge color="secondary"> Max visitors: {{ visitorscount }} </q-badge>
 
         <q-slider
           v-model="visitorscount"
@@ -47,11 +54,12 @@
         />
 
         <div class="q-pa-md">
-          <q-checkbox v-model="pet" label="Pet Friendly" />
-        </div>
-
-        <div class="q-pa-md">
-          <q-date subtitle="Availability" v-model="timeperiod" range color="purple" />
+          <q-date
+            subtitle="Availability"
+            v-model="timeperiod"
+            range
+            color="purple"
+          />
         </div>
 
         <q-toggle v-model="accept" label="I accept the conditions." />
@@ -86,7 +94,7 @@ export default {
     return {
       visitorscount: ref(1),
       spacetype: ref(null),
-      options: [
+      space_options: [
         'Flat',
         'Condo',
         'Single-Family',
@@ -96,7 +104,8 @@ export default {
         'Shared Space',
       ],
       timeperiod: ref({ from: '2020/07/08', to: '2020/07/17' }),
-      pet: ref(false),
+      pet: ref(null),
+      pet_options: ['Yes', 'No', 'More information needed'],
       name,
       age,
       accept,
