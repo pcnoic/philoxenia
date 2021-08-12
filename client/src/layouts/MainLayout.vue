@@ -35,7 +35,7 @@
           />
         </q-tabs>
         <q-select
-          style="font-family: 'Fredoka One', cursive; min-width: 100px;"
+          style="font-family: 'Fredoka One', cursive; min-width: 100px"
           v-model="locale"
           :options="localeOptions"
           dense
@@ -49,18 +49,27 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+
+    <q-footer elevated>
+      <q-toolbar class="bg-purple">
+        <q-toolbar-title>
+          {{ new Date().getFullYear() }} —
+          <strong>Philoxenia - by Tynr.io</strong></q-toolbar-title
+        >
+      </q-toolbar>
+    </q-footer>
   </q-layout>
 </template>
 
 <script lang="ts">
-import { ref,  watch  } from 'vue';
-import { useI18n } from 'vue-i18n'
+import { ref, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
 
 export default {
   name: 'MainLayout',
 
   setup() {
-    const { locale } = useI18n({ useScope: 'global' })
+    const { locale } = useI18n({ useScope: 'global' });
     return {
       tab: ref(''),
 
@@ -68,8 +77,8 @@ export default {
       localeOptions: [
         { value: 'en-US', label: 'English 🇬🇧' },
         { value: 'gr', label: 'Greek 🇬🇷' },
-        { value: 'ar', label: 'Arabic 🇸🇦'}
-      ]
+        { value: 'ar', label: 'Arabic 🇸🇦' },
+      ],
     };
   },
 };
