@@ -37,3 +37,13 @@ def request_space(space_request: SpaceRequest):
         response = json.dumps({"status": "no_results"})
     
     return response
+
+@app.get("/api/v1/space/latest")
+def get_latest_spaces():
+    result = dbspaces.latest()
+    if result is not None:
+        response = json.dumps(result)
+    else:
+        response = json.dumps({})
+    
+    return response
