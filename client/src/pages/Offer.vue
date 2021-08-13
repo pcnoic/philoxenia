@@ -1,13 +1,16 @@
 <template>
   <q-page class="column items-center justify-evenly">
-    <h2 class="text-center">If you are a space owner, fill the form.</h2>
+    <h2 class="text-center">
+      If you are a space owner, fill the form. <br /><br />
+      🏠
+    </h2>
     <div class="q-pa-md" style="max-width: 400px">
       <q-form @submit="onSubmit" @reset="onReset" class="q-gutter-md">
         <q-input
           filled
           v-model="name"
           label="Your name *"
-          hint="Name and surname"
+          hint="Name and surname:"
           lazy-rules
           :rules="[(val) => (val && val.length > 0) || 'Please type something']"
         />
@@ -21,16 +24,69 @@
           lazy-rules
           :rules="[
             (val) => (val !== null && val !== '') || 'Please type your age',
-            (val) => (val > 0 && val < 100) || 'Please type a real age',
+            (val) => (val >18 && val < 100) || 'You have to be an adult to submit your place',
           ]"
         />
+
+        <q-input
+          filled
+          v-model="telephone"
+          label="Your mobile number"
+          hint="A mobile number to be contacted"
+          lazy-rules
+          :rules="[
+            (val) =>
+              (val !== null && val !== '') ||
+              'Please type your mobile number in international format.',
+            (val) =>
+              val.length != 12 ||
+              'Please type a number in international format',
+          ]"
+        />
+
+        <q-input
+          filled
+          v-model="email"
+          hint="An email address to be contacted"
+          input-class="text-right"
+          label-slot
+          clearable
+        >
+          <template v-slot:label>
+            <div class="row items-center all-pointer-events">
+              <q-icon
+                class="q-mr-xs"
+                color="deep-orange"
+                size="24px"
+                name="mail"
+              />
+              Email
+
+              <q-tooltip
+                class="bg-grey-8"
+                anchor="top left"
+                self="bottom left"
+                :offset="[0, 8]"
+                >Email address</q-tooltip
+              >
+            </div>
+          </template>
+        </q-input>
 
         <q-select
           standout
           v-model="spacetype"
-          :space_options="space_options"
+          :options="space_options"
           label="Space Type"
           hint="The type of space you're offering"
+        />
+
+        <q-select
+          standout
+          v-model="region"
+          :options="region_options"
+          label="Region"
+          hint="The region of the space"
         />
 
         <q-select
@@ -50,7 +106,7 @@
           :step="1"
           label="Visitors"
           label-always
-          color="light-green"
+          color="purple"
         />
 
         <div class="q-pa-md">
@@ -65,11 +121,11 @@
         <q-toggle v-model="accept" label="I accept the conditions." />
 
         <div>
-          <q-btn label="Submit" type="submit" color="primary" />
+          <q-btn label="Submit" type="submit" color="purple" />
           <q-btn
             label="Reset"
             type="reset"
-            color="primary"
+            color="purple"
             flat
             class="q-ml-sm"
           />
@@ -103,9 +159,66 @@ export default {
         'Tiny Home',
         'Shared Space',
       ],
+      region: ref(null),
+      region_options: [
+        'Achaea',
+        'Acarnania',
+        'Arcadia',
+        'Argolis',
+        'Arta',
+        'Athens',
+        'Boeotia',
+        'Chalkidiki',
+        'Chania',
+        'Chios',
+        'Corfu',
+        'Corinthia',
+        'Cyclades',
+        'Dodecanese',
+        'Drama',
+        'East Attica',
+        'Elis',
+        'Euboea',
+        'Evros',
+        'Evrytania',
+        'Florina',
+        'Heraklion',
+        'Grevena',
+        'Imathia',
+        'Ioannina',
+        'Kastoria',
+        'Kavala',
+        'Kefallinia',
+        'Karditsa',
+        'Kilkis',
+        'Kozani',
+        'Laconia',
+        'Larissa',
+        'Lasithi',
+        'Lefkada',
+        'Lesbos',
+        'Magnesia',
+        'Messenia',
+        'Pella',
+        'Phocis',
+        'Phthiotis',
+        'Pieria',
+        'Piraeus',
+        'Preveza',
+        'Rethymno',
+        'Rhodope',
+        'Samos',
+        'Serres',
+        'Thesprotia',
+        'Thessaloniki',
+        'Trikala',
+        'West Attica',
+        'Xanthi',
+        'Zakynthos',
+      ],
       timeperiod: ref({ from: '2020/07/08', to: '2020/07/17' }),
       pet: ref(null),
-      pet_options: ['Yes', 'No', 'More information needed'],
+      pet_options: ['Yes', 'No', 'More information required'],
       name,
       age,
       accept,
