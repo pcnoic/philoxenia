@@ -1,3 +1,6 @@
+dev-infra:
+	cd infra/docker/ && docker-compose up
+
 dev-client:
 	cd client/ && quasar dev
 
