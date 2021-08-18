@@ -24,7 +24,9 @@
           lazy-rules
           :rules="[
             (val) => (val !== null && val !== '') || 'Please type your age',
-            (val) => (val >18 && val < 100) || 'You have to be an adult to submit your place',
+            (val) =>
+              (val > 18 && val < 100) ||
+              'You have to be an adult to submit your place',
           ]"
         />
 
@@ -98,15 +100,13 @@
         />
 
         <q-badge color="secondary"> Max visitors: {{ visitorscount }} </q-badge>
-
         <q-slider
           v-model="visitorscount"
+          color="purple"
+          markers
+          snap
           :min="1"
           :max="15"
-          :step="1"
-          label="Visitors"
-          label-always
-          color="purple"
         />
 
         <div class="q-pa-md">
@@ -146,8 +146,17 @@ export default {
     const name = ref(null);
     const age = ref(null);
     const accept = ref(false);
+    const telephone = ref(null);
+    const email = ref(null);
+    const spacetype = ref(null);
+    const region = ref(null);
+    const pet = ref(null);
+    const visitorscount = ref(null);
+    const timeperiod = ref(null);
 
     return {
+      telephone,
+      email,
       visitorscount: ref(1),
       spacetype: ref(null),
       space_options: [
@@ -245,6 +254,13 @@ export default {
         name.value = null;
         age.value = null;
         accept.value = false;
+        telephone.value = null;
+        email.value = null;
+        spacetype.value = null;
+        region.value = null;
+        pet.value = null;
+        visitorscount.value = null;
+        timeperiod.value = null;
       },
     };
   },

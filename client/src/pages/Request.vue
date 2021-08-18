@@ -31,15 +31,13 @@
         />
 
         <q-badge color="secondary"> Max visitors: {{ visitorscount }} </q-badge>
-
         <q-slider
           v-model="visitorscount"
+          color="purple"
+          markers
+          snap
           :min="1"
           :max="15"
-          :step="1"
-          label="Visitors"
-          label-always
-          color="purple"
         />
 
         <div class="q-pa-md">
@@ -68,7 +66,6 @@
   </q-page>
 </template>
 
-
 <script>
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
@@ -77,6 +74,11 @@ export default {
   setup() {
     const $q = useQuasar();
 
+    const spacetype = ref(null);
+    const region = ref(null);
+    const pet = ref(null);
+    const visitorscount = ref(null);
+    const timeperiod = ref(null);
     const accept = ref(false);
 
     return {
@@ -172,8 +174,12 @@ export default {
       },
 
       onReset() {
-        name.value = null;
-        age.value = null;
+        spacetype.value = null;
+        region.value = null;
+        pet.value = null;
+        visitorscount.value = null;
+        timeperiod.value = null;
+
         accept.value = false;
       },
     };
