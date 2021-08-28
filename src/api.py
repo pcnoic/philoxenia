@@ -25,7 +25,7 @@ def up():
 
 @app.post("/api/v1/space/add")
 def add_space(space_offer: SpaceOffer):
-    result = dbspaces.write(space_offer)
+    result = dbspaces.write(space_offer.dict())
     if result == 0:
         response = json.dumps({"status": "success"})
     else:
@@ -35,7 +35,7 @@ def add_space(space_offer: SpaceOffer):
 
 @app.post("/api/v1/space/request")
 def request_space(space_request: SpaceRequest):
-    result = dbspaces.find(space_request)
+    result = dbspaces.find(space_request.dict())
     if result is not None:
         response = json.dumps(result)
     else:

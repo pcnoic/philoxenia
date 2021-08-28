@@ -4,10 +4,9 @@
     
     GNU GENERAL PUBLIC LICENSE
 """
+import os
 
-
-# TODO: make this read params from environment variables
 class ConfigParams:
-    MONGODB_HOST = "mongodb://localhost:27017" # protect with basic auth
-    MONGODB_NAME = "philoxenia_store"
+    MONGODB_HOST = os.environ["MONGODB_HOST"]
+    MONGODB_NAME = os.environ["MONGODB_NAME"]
     DEV_URL = "http://localhost:8000"

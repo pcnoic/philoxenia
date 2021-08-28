@@ -4,11 +4,12 @@ from datetime import date
 class SpaceOffer(BaseModel):
     owner: str
     owner_age: int
+    telephone: str
+    email: str
     type: str
     region: str
-    availability_start: date
-    availability_end: date
-    date_added: date
+    availability_start: str
+    availability_end: str
     visitors_max: int
     pet_friendly: bool
 
