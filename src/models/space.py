@@ -1,22 +1,22 @@
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import date
 
 class SpaceOffer(BaseModel):
     owner: str
     owner_age: int
     type: str
     region: str
-    availability_start: datetime.date
-    availability_end: datetime.date
-    date_added: datetime.date
+    availability_start: date
+    availability_end: date
+    date_added: date
     visitors_max: int
     pet_friendly: bool
 
 class SpaceRequest(BaseModel):
     types: list
     regions: list
-    availability_start: datetime.date
-    availability_end: datetime.date
+    availability_start: date
+    availability_end: date
     visitors_min: int
     visitors_max: int
     pet_friendly: bool
@@ -24,8 +24,8 @@ class SpaceRequest(BaseModel):
 class Space(BaseModel):
     type: str
     region: str
-    availability_start: datetime.date
-    availability_end: datetime.date
+    availability_start: date
+    availability_end: date
     visitors_min: int
     visitors_max: int
     pet_friendly: bool
