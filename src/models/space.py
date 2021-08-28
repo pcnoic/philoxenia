@@ -5,11 +5,10 @@ class SpaceOffer(BaseModel):
     owner: str
     owner_age: int
     type: str
-    regions: list
+    region: str
     availability_start: datetime.date
     availability_end: datetime.date
     date_added: datetime.date
-    visitors_min: int
     visitors_max: int
     pet_friendly: bool
 
