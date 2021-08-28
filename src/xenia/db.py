@@ -43,3 +43,10 @@ class DBSpaces:
                     return 1
                 
         return spaces
+
+    def latest(self):
+        space = Space()
+        spaces = []
+
+        docs = spaces_collection.find().sort({x:1})
+
