@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */ /*
+eslint-disable @typescript-eslint/no-unsafe-member-access */
 <template>
   <q-page class="column items-center justify-evenly">
     <h2 class="text-center" style="font-family: 'Megrim', cursive">
       🫂
-      <br><br>
+      <br /><br />
       Welcome to Philoxenia, the P2P Space Exchange
-       
     </h2>
     <q-btn
       align="around"
@@ -14,121 +15,98 @@
       icon="lightbulb_outline"
       to="/about"
     />
-<div class="q-pa-md">
-    <q-table
-      :grid="$q.screen.xs"
-      title="Latest spaces added 🏠"
-      :rows="rows"
-      :columns="columns"
-      row-key="name"
-      :filter="filter"
-      hide-header
-    >
-      <template v-slot:top-right>
-        <q-input borderless dense debounce="300" v-model="filter" placeholder="Search">
-          <template v-slot:append>
-            <q-icon name="search" />
-          </template>
-        </q-input>
-      </template>
-    </q-table>
-  </div>
+    <div class="q-pa-md">
+      <q-table
+        grid
+        card-class="text-black"
+        title="Latest spaces added 🏠"
+        :rows="rows"
+        :columns="columns"
+        row-key="name"
+        :filter="filter"
+        hide-header
+      >
+        <template v-slot:top-right>
+          <q-input
+            borderless
+            dense
+            debounce="300"
+            v-model="filter"
+            placeholder="Search"
+          >
+            <template v-slot:append>
+              <q-icon name="search" />
+            </template>
+          </q-input>
+        </template>
+      </q-table>
+    </div>
   </q-page>
 </template>
 <script>
-import { ref } from 'vue'
+import { ref } from 'vue';
 
 const columns = [
   {
-    name: 'desc',
+    name: 'type',
     required: true,
-    label: 'Dessert (100g serving)',
+    label: 'Type',
     align: 'left',
-    field: row => row.name,
-    format: val => `${val}`,
-    sortable: true
+    field: 'type',
+    sortable: true,
   },
-  { name: 'calories', align: 'center', label: 'Calories', field: 'calories', sortable: true },
-  { name: 'fat', label: 'Fat (g)', field: 'fat', sortable: true },
-  { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-  { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-  { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-  { name: 'carbs', label: 'Carbs (g)', field: 'carbs' },
-  { name: 'carbs', label: 'Carbs (g)', field: 'carbs' }
-]
+  {
+    name: 'location',
+    align: 'center',
+    label: 'Location',
+    field: 'location',
+    sortable: true,
+  },
+  { name: 'capacity', label: 'Capacity', field: 'capacity', sortable: true },
+  { name: 'pets', label: 'Pet Friendly', field: 'pets' },
+  { name: 'availability', label: 'Days Available', field: 'availability' }
+];
 
 const rows = [
   {
-    name: 'Frozen Yogurt',
-    calories: 159,
-    fat: 6.0,
-    carbs: 24
+    type: 'Loft',
+    location: 'Earth',
+    capacity: 10,
+    pets: 'Yes',
+    availability: 10
   },
-  {
-    name: 'Ice cream sandwich',
-    calories: 237,
-    fat: 9.0,
-    carbs: 37
+    {
+    type: 'Loft',
+    location: 'Earth',
+    capacity: 10,
+    pets: 'Yes',
+    availability: 10
   },
-  {
-    name: 'Eclair',
-    calories: 262,
-    fat: 16.0,
-    carbs: 23
+    {
+    type: 'Loft',
+    location: 'Earth',
+    capacity: 10,
+    pets: 'Yes',
+    availability: 10
   },
-  {
-    name: 'Cupcake',
-    calories: 305,
-    fat: 3.7,
-    carbs: 67
-  },
-  {
-    name: 'Gingerbread',
-    calories: 356,
-    fat: 16.0,
-    carbs: 49
-  },
-  {
-    name: 'Jelly bean',
-    calories: 375,
-    fat: 0.0,
-    carbs: 94
-  },
-  {
-    name: 'Lollipop',
-    calories: 392,
-    fat: 0.2,
-    carbs: 98
-  },
-  {
-    name: 'Honeycomb',
-    calories: 408,
-    fat: 3.2,
-    carbs: 87
-  },
-  {
-    name: 'Donut',
-    calories: 452,
-    fat: 25.0,
-    carbs: 51
-  },
-  {
-    name: 'KitKat',
-    calories: 518,
-    fat: 26.0,
-    carbs: 65
+    {
+    type: 'Loft',
+    location: 'Earth',
+    capacity: 10,
+    pets: 'Yes',
+    availability: 10
   }
-]
+];
 
 export default {
-  setup () {
+  setup() {
     return {
       filter: ref(''),
       columns,
-      rows
-    }
-  }
-}
+      rows,
+    };
+  },
+};
 </script>
 
 <style scoped>

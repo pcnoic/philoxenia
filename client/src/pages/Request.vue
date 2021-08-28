@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */ /*
+eslint-disable @typescript-eslint/no-unsafe-member-access */
 <template>
   <q-page class="column items-center justify-evenly">
     <h2 class="text-center">

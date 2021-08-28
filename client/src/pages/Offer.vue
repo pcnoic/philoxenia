@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */ /*
+eslint-disable @typescript-eslint/no-unsafe-member-access */
 <template>
   <q-page class="column items-center justify-evenly">
     <h2 class="text-center">
@@ -138,6 +140,7 @@
 <script>
 import { useQuasar } from 'quasar';
 import { ref } from 'vue';
+import { api } from 'boot/axios'
 
 export default {
   setup() {
@@ -233,19 +236,34 @@ export default {
       accept,
 
       onSubmit() {
+
         if (accept.value !== true) {
           $q.notify({
             color: 'red-5',
             textColor: 'white',
             icon: 'warning',
-            message: 'You need to accept the license and terms first',
+            message: 'You need to accept the license and terms first!',
           });
         } else {
+
+          // Make request to offer
+          /* eslint-disable */
+          const spaceOffer = {
+            owner: name.value,
+            owner_age: age.value,
+            type: spacetype.value,
+            region: region.value,
+            availability_start: timeperiod.value,
+            availability_end: timeperiod.value,
+            visitors_max: visitorscount.value,
+            pet_friendly: pet.value
+          }
+
           $q.notify({
             color: 'green-4',
             textColor: 'white',
             icon: 'cloud_done',
-            message: 'Submitted',
+            message: 'Your space has been added to Philoxenia!',
           });
         }
       },
