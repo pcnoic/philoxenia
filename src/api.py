@@ -18,12 +18,12 @@ app = FastAPI()
 dbspaces = DBSpaces()
 
 # Endpoints
-@app.get("/v1/up")
+@app.get("/api/v1/up")
 def up():
     response = json.dumps({"status": "alive"})
     return response
 
-@app.post("/v1/space/add")
+@app.post("/api/v1/space/add")
 def add_space(space_offer: SpaceOffer):
     result = dbspaces.write(space_offer)
     if result == 0:
@@ -33,7 +33,7 @@ def add_space(space_offer: SpaceOffer):
     
     return response
 
-@app.post("/v1/space/request")
+@app.post("/api/v1/space/request")
 def request_space(space_request: SpaceRequest):
     result = dbspaces.find(space_request)
     if result is not None:
@@ -43,7 +43,7 @@ def request_space(space_request: SpaceRequest):
     
     return response
 
-@app.get("/v1/space/latest")
+@app.get("/api/v1/space/latest")
 def get_latest_spaces():
     result = dbspaces.latest()
     if result is not None:
