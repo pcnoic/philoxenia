@@ -47,8 +47,7 @@ class DBSpaces:
                 cursor = spaces_collection.find(new_space, { "_id" :0 })
 
             for doc in cursor:
-                json_doc = json.dumps(doc, default=json_util.default)
-                spaces.append(json_doc.replace("\"", ""))
+                spaces.append(doc)
 
         except Exception as e:
             print("Failed to query database: ", e)
@@ -59,9 +58,7 @@ class DBSpaces:
     def latest(self):
         spaces = []
 
-        cursor = spaces_collection.find({}, { "_id": 0, "owner": 0, "owner_age": 0, "telephone": 0, "email": 0 }).sort("_id", 1)
+        cursor = spaces_collection.find({}, { "_id": 0, "owner": 0, "owner_age": 0, "telephone": 0, "email": 0 }).sort("_id", 1).limit(50)
         for doc in cursor:
-            json_doc = json.dumps(doc, default=json_util.default)
-            spaces.append(json_doc.replace("\"", ""))
-
+            spaces.append(doc)
         return spaces
