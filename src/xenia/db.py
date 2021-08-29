@@ -39,12 +39,12 @@ class DBSpaces:
         space.pet_friendly = space_request["pet_friendly"]
 
         try:
-            cursor = spaces_collection.find(space.dict())
+            cursor = spaces_collection.find(space.dict(), { "_id": 0 })
             # remove type for a braoder search
             if cursor.count() == 0:
                 new_space = space.dict()  # since Space does not allow object transformations
                 del new_space["type"]
-                cursor = spaces_collection.find(new_space)
+                cursor = spaces_collection.find(new_space, { "_id" :0 })
 
             for doc in cursor:
                 json_doc = json.dumps(doc, default=json_util.default)
@@ -59,7 +59,7 @@ class DBSpaces:
     def latest(self):
         spaces = []
 
-        cursor = spaces_collection.find().sort("_id", 1)
+        cursor = spaces_collection.find({}, { "_id": 0, "owner": 0, "owner_age": 0, "telephone": 0, "email": 0 }).sort("_id", 1)
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
             spaces.append(json_doc.replace("\"", ""))
