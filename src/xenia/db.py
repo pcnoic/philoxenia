@@ -1,4 +1,7 @@
 import pymongo
+from bson import json_util
+import json
+
 from config import ConfigParams
 from models.space import Space
 
@@ -18,35 +21,47 @@ class DBSpaces:
         return 0
 
     def find(self, space_request):
-        space = Space()
+        space = Space(
+            type="",
+            region="",
+            availability_start="",
+            availability_end="",
+            visitors_max=0,
+            pet_friendly=False
+        )
         spaces = []
 
-        for space_type in space_request.types:
-            space.type = space_type
-            for space_region in space_request.regions:
-                space.region = space_region
-                space.availability_start = space_request.availability_start
-                space.availability_end = space_request.availability_end
-                space.visitors_min = space_request.visitors_min
-                space.visitors_max = space_request.visitors_max
-                space.pet_friendly = space_request.pet_friendly
+        space.type = space_request["type"]
+        space.region = space_request["region"]
+        space.availability_start = space_request["availability_start"]
+        space.availability_end = space_request["availability_end"]
+        space.visitors_max = space_request["visitors_max"]
+        space.pet_friendly = space_request["pet_friendly"]
 
-                try:
-                    doc = spaces_collection.find(space)
-                    if doc is None:
-                        space.pop('type')
-                        doc = spaces_collection.find(space)
-                        if doc is None:
-                            break
-                except Exception as e:
-                    print("Failed to query database: ", e)
-                    return 1
-                
+        try:
+            cursor = spaces_collection.find(space.dict())
+            # remove type for a braoder search
+            if cursor.count() == 0:
+                new_space = space.dict()  # since Space does not allow object transformations
+                del new_space["type"]
+                cursor = spaces_collection.find(new_space)
+
+            for doc in cursor:
+                json_doc = json.dumps(doc, default=json_util.default)
+                spaces.append(json_doc.replace("\"", ""))
+
+        except Exception as e:
+            print("Failed to query database: ", e)
+            return 1
+
         return spaces
 
     def latest(self):
-        space = Space()
         spaces = []
 
-        docs = spaces_collection.find().sort({x:1})
+        cursor = spaces_collection.find().sort("_id", 1)
+        for doc in cursor:
+            json_doc = json.dumps(doc, default=json_util.default)
+            spaces.append(json_doc.replace("\"", ""))
 
+        return spaces

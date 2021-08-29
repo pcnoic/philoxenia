@@ -14,19 +14,17 @@ class SpaceOffer(BaseModel):
     pet_friendly: bool
 
 class SpaceRequest(BaseModel):
-    types: list
-    regions: list
-    availability_start: date
-    availability_end: date
-    visitors_min: int
-    visitors_max: int
+    availability_end: str
+    availability_start: str
     pet_friendly: bool
-
+    region: str
+    type: str
+    visitors_max: int
+    
 class Space(BaseModel):
     type: str
     region: str
-    availability_start: date
-    availability_end: date
-    visitors_min: int
+    availability_start: str
+    availability_end: str
     visitors_max: int
     pet_friendly: bool

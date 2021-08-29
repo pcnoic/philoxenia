@@ -36,8 +36,8 @@ def add_space(space_offer: SpaceOffer):
 @app.post("/api/v1/space/request")
 def request_space(space_request: SpaceRequest):
     result = dbspaces.find(space_request.dict())
-    if result is not None:
-        response = json.dumps(result)
+    if len(result) is not 0:
+        response = result
     else:
         response = json.dumps({"status": "no_results"})
     
@@ -47,8 +47,8 @@ def request_space(space_request: SpaceRequest):
 def get_latest_spaces():
     result = dbspaces.latest()
     if result is not None:
-        response = json.dumps(result)
+        response = result
     else:
-        response = json.dumps({})
+        response = json.dumps({"status":"no_results"})
     
     return response
