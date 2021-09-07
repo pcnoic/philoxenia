@@ -1,5 +1,5 @@
 dev-infra:
-	cd infra/docker/ && docker-compose up
+	cd infra/docker/ && docker-compose up -d
 
 dev-api:
 	cd src/ && uvicorn api:app --reload
