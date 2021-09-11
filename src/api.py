@@ -30,16 +30,16 @@ dbspaces = DBSpaces()
 # Endpoints
 @app.get("/api/v1/up")
 def up():
-    response = json.dumps({"status": "alive"})
+    response = {"status": "alive"}
     return response
 
 @app.post("/api/v1/space/add")
 def add_space(space_offer: SpaceOffer):
     result = dbspaces.write(space_offer.dict())
     if result == 0:
-        response = json.dumps({"status": "success"})
+        response = {"status": "success"}
     else:
-        response = json.dumps({"status": "fail"})
+        response = {"status": "fail"}
     
     return response
 
@@ -49,7 +49,7 @@ def request_space(space_request: SpaceRequest):
     if len(result) is not 0:
         response = result
     else:
-        response = json.dumps({"status": "no_results"})
+        response = {"status": "no_results"}
     
     return response
 
@@ -59,6 +59,6 @@ def get_latest_spaces():
     if result is not None:
         response = result
     else:
-        response = json.dumps({"status":"no_results"})
+        response = {"status":"no_results"}
     
     return response
